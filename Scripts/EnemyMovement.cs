@@ -12,7 +12,7 @@ class EnemyMovement : MonoBehaviour
     [HideInInspector]
     [SerializeField] string Name;
     [HideInInspector]
-    [SerializeField] bool ýsCanMove;
+    [SerializeField] bool ýsCanMove, horMovement, verMovement, doubleMovement;
 
 
 
@@ -22,7 +22,15 @@ class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        ///<sumarry>
+        /// we're getting our variable's value from our enemy's data.
+        /// </sumarry>
+
+        #region variables
         data = GetComponent<EnemyData>();
+        horMovement = data.horMovement;
+        verMovement = data.verMovement;
+        doubleMovement = data.doubleMovement;
         ýsCanMove = data.ýsCanMove;
         speed = data.speed;
         target = data.target;
@@ -32,22 +40,13 @@ class EnemyMovement : MonoBehaviour
         agroRange = data.agroRange;
         sp = data.spriteRenderer;
         gameObject.name = Name;
-
-
         rb = this.GetComponent<Rigidbody2D>();
         gameObject.GetComponent<SpriteRenderer>().sprite = sp;
-    }
-
-    private void Start()
-    {
-        
-
-        ///<sumarry>
-        /// we're getting our variable's value from our enemy's data.
-        /// </sumarry>
+        #endregion
 
 
     }
+
     /// <summary>
     /// you should add what you want for here.
     /// </summary>
@@ -61,10 +60,8 @@ class EnemyMovement : MonoBehaviour
         {
             float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
-
             if (distanceToPlayer <= agroRange && distanceToPlayer >= 3)
             {
-
                 Moving();
             }
 
@@ -83,19 +80,24 @@ class EnemyMovement : MonoBehaviour
 
 
 
-    #region MovementFonctions
+    #region Moving
     void Moving()
     {
-
-        if (transform.position.x < target.position.x)
+        if (horMovement == true)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            horizontalMovement();
+        }
+        else if (verMovement == true)
+        {
+            verticleMovement();
 
         }
-        else
+        else if (doubleMovement == true)
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            DoubleMovement();
         }
+
+
     }
 
     void Stop()
@@ -106,5 +108,28 @@ class EnemyMovement : MonoBehaviour
     }
     #endregion
 
+    #region MOVEMENT_FUNCTIONS
+    void horizontalMovement()
+    {
+        if (transform.position.x < target.position.x)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
+    }
+    void verticleMovement()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, target.position.y), speed * Time.deltaTime);
+    }
+    void DoubleMovement()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    }
+    #endregion
 
 }

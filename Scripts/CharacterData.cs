@@ -21,18 +21,17 @@ public class CharacterData : MonoBehaviour
     [SerializeField] bool IsCanMove;
 
     [Header("-----Enemy Movement Settings-----")]
+    [SerializeField] Types.MOVEMENT Movement_Type;
     [SerializeField] float agroRange;
 
-
-
-
+    private void Awake()
+    {
+        Movement_Type = Types.MOVEMENT.HORIZONTAL;
+    }
     public void createAnEnemy()
     {
-
         GameObject enemyObjected = Instantiate(prefab, spawner.position, Quaternion.identity);
         TakingVariables(enemyObjected);
-
-
     }
 
     #region TakeingVariabes
@@ -42,9 +41,21 @@ public class CharacterData : MonoBehaviour
         prfb.AddComponent<EnemyData>();
         prfb.AddComponent<Rigidbody2D>();
         prfb.AddComponent<BoxCollider2D>();
-
         EnemyData enemyData = prfb.GetComponent<EnemyData>();
-
+        switch (Movement_Type)
+        {
+            case Types.MOVEMENT.HORIZONTAL:
+                enemyData.horMovement = true;
+                break;
+            case Types.MOVEMENT.VERTICLE:
+                enemyData.verMovement = true;
+                break;
+            case Types.MOVEMENT.HORIZONTAL_and_VERTICLE:
+                enemyData.doubleMovement = true;
+                break;
+            default:
+                break;
+        }
         enemyData.Health = health;
         enemyData.Damage = damage;
         enemyData.spriteRenderer = enemySprite;

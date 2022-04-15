@@ -9,7 +9,7 @@ public class EnemyData : MonoBehaviour
     public Sprite spriteRenderer;
     public float Health, speed, Damage, agroRange;
     public string Name;
-    public bool ýsCanMove;
+    public bool ýsCanMove, horMovement, verMovement, doubleMovement;
     public Transform target;
 
 
