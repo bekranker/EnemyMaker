@@ -8,11 +8,11 @@ class EnemyMovement : MonoBehaviour
     [HideInInspector]
     [SerializeField] Transform target;
     [HideInInspector]
-    [SerializeField] float speed, agroRange, health, Damage;
+    [SerializeField] float speed, agroRange;
     [HideInInspector]
     [SerializeField] string Name;
     [HideInInspector]
-    [SerializeField] bool ýsCanMove, horMovement, verMovement, doubleMovement;
+    [SerializeField] bool isCanMove, horMovement, verMovement, doubleMovement;
 
 
 
@@ -28,15 +28,13 @@ class EnemyMovement : MonoBehaviour
 
         #region variables
         data = GetComponent<EnemyData>();
-        horMovement = data.horMovement;
-        verMovement = data.verMovement;
-        doubleMovement = data.doubleMovement;
-        ýsCanMove = data.ýsCanMove;
+        horMovement = data.XMovement;
+        verMovement = data.YMovement;
+        doubleMovement = data.XYMovement;
+        isCanMove = data.isCanMove;
         speed = data.speed;
         target = data.target;
         Name = data.Name;
-        Damage = data.Damage;
-        health = data.Health;
         agroRange = data.agroRange;
         sp = data.spriteRenderer;
         gameObject.name = Name;
@@ -56,7 +54,7 @@ class EnemyMovement : MonoBehaviour
     {
 
         #region Movement
-        if (ýsCanMove == true)
+        if (isCanMove == true)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 

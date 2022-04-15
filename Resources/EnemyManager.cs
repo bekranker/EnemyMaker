@@ -7,9 +7,9 @@ public class EnemyData : MonoBehaviour
 {
 
     public Sprite spriteRenderer;
-    public float Health, speed, Damage, agroRange;
+    public float  speed, agroRange;
     public string Name;
-    public bool ýsCanMove, horMovement, verMovement, doubleMovement;
+    public bool isCanMove, XMovement, YMovement, XYMovement;
     public Transform target;
 
 

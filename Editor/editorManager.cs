@@ -5,6 +5,8 @@ using UnityEngine;
 [CustomEditor(typeof(CharacterData))]
 public class editorManager : Editor
 {
+
+#if (UNITY_EDITOR)
     public override void OnInspectorGUI()
     {
 
@@ -24,6 +26,6 @@ public class editorManager : Editor
 
     }
 
-
+#endif
 
 }

@@ -7,13 +7,10 @@ public class CharacterData : MonoBehaviour
 
     [Header("-----Basic Enemy Properities-----")]
     [SerializeField] Sprite enemySprite;
-    [SerializeField] float health;
-    [SerializeField] float damage;
     [SerializeField] string Name;
 
     [Header("------The Enemy's Appearance-----")]
     [SerializeField] GameObject prefab;
-    [SerializeField] Transform spawner;
     [SerializeField] Transform Target;
 
     [Header("-----Enemy Physics-----")]
@@ -26,11 +23,11 @@ public class CharacterData : MonoBehaviour
 
     private void Awake()
     {
-        Movement_Type = Types.MOVEMENT.HORIZONTAL;
+        Movement_Type = Types.MOVEMENT.Horizontle;
     }
     public void createAnEnemy()
     {
-        GameObject enemyObjected = Instantiate(prefab, spawner.position, Quaternion.identity);
+        GameObject enemyObjected = Instantiate(prefab, transform.position, Quaternion.identity);
         TakingVariables(enemyObjected);
     }
 
@@ -44,24 +41,22 @@ public class CharacterData : MonoBehaviour
         EnemyData enemyData = prfb.GetComponent<EnemyData>();
         switch (Movement_Type)
         {
-            case Types.MOVEMENT.HORIZONTAL:
-                enemyData.horMovement = true;
+            case Types.MOVEMENT.Horizontle:
+                enemyData.XMovement = true;
                 break;
-            case Types.MOVEMENT.VERTICLE:
-                enemyData.verMovement = true;
+            case Types.MOVEMENT.Vertical:
+                enemyData.YMovement = true;
                 break;
-            case Types.MOVEMENT.HORIZONTAL_and_VERTICLE:
-                enemyData.doubleMovement = true;
+            case Types.MOVEMENT.Horizontal_and_Vertical:
+                enemyData.XYMovement = true;
                 break;
             default:
                 break;
         }
-        enemyData.Health = health;
-        enemyData.Damage = damage;
         enemyData.spriteRenderer = enemySprite;
         enemyData.Name = Name;
         enemyData.target = Target;
-        enemyData.ýsCanMove = IsCanMove;
+        enemyData.isCanMove = IsCanMove;
         enemyData.speed = enemySpeed;
         enemyData.agroRange = agroRange;
 
