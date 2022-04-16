@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-
+#if(UNITY_EDITOR_WIN)
 public class CharacterData : MonoBehaviour
 {
 
@@ -66,3 +66,4 @@ public class CharacterData : MonoBehaviour
 
 
 }
+#endif

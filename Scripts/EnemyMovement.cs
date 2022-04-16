@@ -100,9 +100,9 @@ class EnemyMovement : MonoBehaviour
 
     void Stop()
     {
-
-        rb.velocity = new Vector2(0, rb.velocity.y);
-
+        if (horMovement) { rb.velocity = new Vector2(0, rb.velocity.y); }
+        if (verMovement) { rb.velocity = new Vector2(rb.velocity.x, 0); }
+        if (doubleMovement) { rb.velocity = new Vector2(0, 0); }
     }
     #endregion
 
