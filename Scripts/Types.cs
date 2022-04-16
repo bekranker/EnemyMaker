@@ -7,7 +7,7 @@ public static class Types
     public enum MOVEMENT
     {
 
-        Horizontle,
+        Horizontal,
         Vertical,
         Horizontal_and_Vertical
 

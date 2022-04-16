@@ -23,7 +23,7 @@ public class CharacterData : MonoBehaviour
 
     private void Awake()
     {
-        Movement_Type = Types.MOVEMENT.Horizontle;
+        Movement_Type = Types.MOVEMENT.Horizontal;
     }
     public void createAnEnemy()
     {
@@ -41,7 +41,7 @@ public class CharacterData : MonoBehaviour
         EnemyData enemyData = prfb.GetComponent<EnemyData>();
         switch (Movement_Type)
         {
-            case Types.MOVEMENT.Horizontle:
+            case Types.MOVEMENT.Horizontal:
                 enemyData.XMovement = true;
                 break;
             case Types.MOVEMENT.Vertical:
