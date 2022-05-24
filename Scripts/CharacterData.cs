@@ -3,8 +3,8 @@ using UnityEngine;
 #if(UNITY_EDITOR_WIN)
 public class CharacterData : MonoBehaviour
 {
+    [HideInInspector]
     public EnemyData data = new EnemyData();
-
     [Header("-----Basic Enemy Properities-----")]
     [SerializeField] Sprite enemySprite;
     [SerializeField] string Name;
@@ -34,6 +34,7 @@ public class CharacterData : MonoBehaviour
     #region TakeingVariabes
     void TakingVariables(GameObject prfb)
     {
+        data = new EnemyData();
         prfb.AddComponent<EnemyMovement>();
         prfb.AddComponent<Rigidbody2D>();
         prfb.AddComponent<BoxCollider2D>();

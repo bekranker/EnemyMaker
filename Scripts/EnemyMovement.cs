@@ -72,12 +72,12 @@ class EnemyMovement : Move
         {
             horizontalMovement();
         }
-        else if (verMovement == true)
+        if (verMovement == true)
         {
             verticleMovement();
 
         }
-        else if (doubleMovement == true)
+        if (doubleMovement == true)
         {
             DoubleMovement();
         }
