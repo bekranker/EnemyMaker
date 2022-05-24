@@ -1,22 +1,22 @@
-using System.Collections;
 using UnityEngine;
 
 
-
-
 #if(UNITY_EDITOR_WIN)
-#region data
+#region DATA
+
 [System.Serializable]
-public class EnemyData : MonoBehaviour
+public class EnemyData
 {
 
     public Sprite spriteRenderer;
-    public float  speed, agroRange;
+    public float speed;
+    public float agroRange;
     public string Name;
-    [HideInInspector]
-    public bool XMovement, YMovement, XYMovement;
-    public Transform target;
+    public bool XMovement;
+    public bool XYMovement;
+    public bool YMovement;
     public bool isCanMove;
+    public Transform target;
 
 }
 #endregion

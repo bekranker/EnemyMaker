@@ -1,8 +1,7 @@
-using System.Collections;
 using UnityEngine;
-using UnityEditor;
 
-class EnemyMovement : MonoBehaviour
+
+class EnemyMovement : Move
 {
     [HideInInspector]
     [SerializeField] Sprite sp;
@@ -15,20 +14,17 @@ class EnemyMovement : MonoBehaviour
     [HideInInspector]
     [SerializeField] bool isCanMove, horMovement, verMovement, doubleMovement;
 
-
-
-    EnemyData data;
     Rigidbody2D rb;
-
+    CharacterData characterData;
 
     private void Awake()
     {
         ///<sumarry>
         /// we're getting our variable's value from our enemy's data.
         /// </sumarry>
-
+        characterData = FindObjectOfType<CharacterData>();
+        EnemyData data = characterData.data;
         #region variables
-        data = GetComponent<EnemyData>();
         horMovement = data.XMovement;
         verMovement = data.YMovement;
         doubleMovement = data.XYMovement;
@@ -42,8 +38,6 @@ class EnemyMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         gameObject.GetComponent<SpriteRenderer>().sprite = sp;
         #endregion
-
-
     }
 
     /// <summary>
@@ -53,7 +47,6 @@ class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-
         #region Movement
         if (isCanMove == true)
         {
@@ -68,16 +61,9 @@ class EnemyMovement : MonoBehaviour
             {
                 Stop();
             }
-
-
-
         }
         #endregion
-
     }
-
-
-
 
     #region Moving
     void Moving()
@@ -95,8 +81,6 @@ class EnemyMovement : MonoBehaviour
         {
             DoubleMovement();
         }
-
-
     }
 
     void Stop()
@@ -110,24 +94,15 @@ class EnemyMovement : MonoBehaviour
     #region MOVEMENT_FUNCTIONS
     void horizontalMovement()
     {
-        if (transform.position.x < target.position.x)
-        {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
-        }
+        _HorizontaltMove(gameObject.transform, target, speed);
     }
     void verticleMovement()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, target.position.y), speed * Time.deltaTime);
+        _VerticalMove(gameObject.transform, target, speed);
     }
     void DoubleMovement()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        _DoubleMovement(gameObject.transform, target, speed);
     }
     #endregion
 

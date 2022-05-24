@@ -1,9 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
 #if(UNITY_EDITOR_WIN)
 public class CharacterData : MonoBehaviour
 {
+    public EnemyData data = new EnemyData();
 
     [Header("-----Basic Enemy Properities-----")]
     [SerializeField] Sprite enemySprite;
@@ -35,31 +35,28 @@ public class CharacterData : MonoBehaviour
     void TakingVariables(GameObject prfb)
     {
         prfb.AddComponent<EnemyMovement>();
-        prfb.AddComponent<EnemyData>();
         prfb.AddComponent<Rigidbody2D>();
         prfb.AddComponent<BoxCollider2D>();
-        EnemyData enemyData = prfb.GetComponent<EnemyData>();
         switch (Movement_Type)
         {
             case Types.MOVEMENT.Horizontal:
-                enemyData.XMovement = true;
+                data.XMovement = true;
                 break;
             case Types.MOVEMENT.Vertical:
-                enemyData.YMovement = true;
+                data.YMovement = true;
                 break;
             case Types.MOVEMENT.Horizontal_and_Vertical:
-                enemyData.XYMovement = true;
+                data.XYMovement = true;
                 break;
             default:
                 break;
         }
-        enemyData.spriteRenderer = enemySprite;
-        enemyData.Name = Name;
-        enemyData.target = Target;
-        enemyData.isCanMove = IsCanMove;
-        enemyData.speed = enemySpeed;
-        enemyData.agroRange = agroRange;
-
+        data.spriteRenderer = enemySprite;
+        data.Name = Name;
+        data.target = Target;
+        data.isCanMove = IsCanMove;
+        data.speed = enemySpeed;
+        data.agroRange = agroRange;
     }
     #endregion
 
